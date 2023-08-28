@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .result-container {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search Result</h1>
+        <div class="result-container">
+            <p>Precision: {{ precision }}</p>
+            <!-- Display search results here -->
+            <h2>Relevant Documents</h2>
+            {% if total_length == 0 %}
+                <div class="result-item">
+                    <span class="result-label">No Result</span>
+                </div>
+            {% else %}
+                <div class="result-item">
+                    <span class="result-label">Relevant Documents count:</span> {{ total_length }}
+                </div>
+                {% for index, key, value in result_dict %}
+                <div class="result-item">
+                    <span class="result-label">Rank:</span> {{ index + 1 }}    |    
+                    <span class="result-label">Document ID:</span> {{ key }}    |    
+                    <span class="result-label">Relevance Score:</span> {{ value }}
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
